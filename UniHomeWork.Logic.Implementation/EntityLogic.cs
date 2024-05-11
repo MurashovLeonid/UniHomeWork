@@ -42,7 +42,7 @@ namespace UniHomeWork.Logic.Implementation
             { 
                 Id = result.Id,
                 Amount = result.Amount, 
-                OperationDate = result.OperationDate 
+                OperationDate = result.Created
             } : default;
         }
     }

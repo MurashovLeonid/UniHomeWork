@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniHomeWork.Domain;
+using UniHomeWork.Domain.Interfaces;
 using UniHomeWork.Infrastructure.Interfaces;
 
 namespace UniHomeWork.Infrastructure.Implementation
@@ -26,7 +27,6 @@ namespace UniHomeWork.Infrastructure.Implementation
         /// <returns></returns>
         public async Task<Guid> AddEntityToDbAsync(Entity entity)
         {
-            entity.OperationDate = DateTime.Now.ToUniversalTime();
             Entities.Add(entity);
             await SaveChangesAsync();
             return entity.Id;
@@ -40,6 +40,31 @@ namespace UniHomeWork.Infrastructure.Implementation
         public async Task<Entity?> GetEntityByIdAsync(Guid id)
         {
             return await Entities.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            var entitiesCreated = ChangeTracker.Entries()
+                .Where(e => e.Entity is IAuditable && e.State == EntityState.Added)
+                .Select(x => x.Entity as IAuditable)
+                .ToList();
+
+            var entitiesModified = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is IAuditable && e.State == EntityState.Modified)
+                .Select(x => x.Entity as IAuditable)
+                .ToList();
+
+            foreach (var entity in entitiesCreated)
+            {
+                entity.Created = DateTime.Now.ToUniversalTime();
+            }
+
+            foreach (var entity in entitiesModified)
+            {
+                entity.Updated = DateTime.Now.ToUniversalTime();
+            }
+            await base.SaveChangesAsync();
         }
     }
 }

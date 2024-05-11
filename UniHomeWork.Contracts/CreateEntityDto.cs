@@ -13,5 +13,9 @@ namespace UniHomeWork.Contracts
         [Required]
         [AmountValidation]
         public decimal Amount { get; set; }
+        public CreateEntityDto()
+        {
+            Amount = 100000000;
+        }
     }
 }
