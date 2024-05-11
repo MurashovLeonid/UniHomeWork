@@ -1,14 +1,27 @@
+using UniHomeWork.Infrastructure.Implementation;
+using UniHomeWork.Infrastructure.Interfaces;
+using UniHomeWork.Logic.Implementation;
+using UniHomeWork.Logic.Interface;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<InMemoryContext>();
 
 builder.Services.AddControllers();
 
+builder.Services.AddTransient<IEntityLogic, EntityLogic>();
+builder.Services.AddTransient<IInMemoryContext, InMemoryContext>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 
-app.UseAuthorization();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapControllers();
 

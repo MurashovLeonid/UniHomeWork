@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UniHomeWork.Contracts\UniHomeWork.Contracts.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.29" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UniHomeWork.Domain\UniHomeWork.Domain.csproj" />
     <ProjectReference Include="..\UniHomeWork.Infrastructure.Interfaces\UniHomeWork.Infrastructure.Interfaces.csproj" />
-    <ProjectReference Include="..\UniHomeWork.Logic.Interface\UniHomeWork.Logic.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

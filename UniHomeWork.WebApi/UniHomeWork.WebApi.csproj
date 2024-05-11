@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.29" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UniHomeWork.Contracts\UniHomeWork.Contracts.csproj" />
+    <ProjectReference Include="..\UniHomeWork.Infrastructure.Implementation\UniHomeWork.Infrastructure.Implementation.csproj" />
+    <ProjectReference Include="..\UniHomeWork.Logic.Implementation\UniHomeWork.Logic.Implementation.csproj" />
+    <ProjectReference Include="..\UniHomeWork.Logic.Interface\UniHomeWork.Logic.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
