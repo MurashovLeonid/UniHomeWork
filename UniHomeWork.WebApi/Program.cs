@@ -18,9 +18,6 @@ var app = builder.Build();
 
 var scope = app.Services.CreateScope();
 
-var context = scope.ServiceProvider.GetService<InMemoryContext>();
-
-await context.SaveChangesAsync();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
